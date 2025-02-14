@@ -47,7 +47,7 @@ public class UserController {
 
     private void validateUser(User user) {
         if (user.getEmail() == null || user.getEmail().isBlank()) {
-            log.error("Не указан email, userEmail={}" , user.getEmail());
+            log.error("Не указан email, userEmail={}", user.getEmail());
             throw new ValidateException("Email не указан, либо пустой");
         }
         if (!user.getEmail().contains("@")) {
