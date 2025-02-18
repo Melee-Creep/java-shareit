@@ -14,7 +14,7 @@ import ru.practicum.shareit.user.repository.UserRepository;
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
 
-   private  final UserRepository userRepository;
+   private final UserRepository userRepository;
 
     @Override
     public UserDto getUserById(long id) {
@@ -27,8 +27,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.createUser(user);
+    public UserDto createUser(UserDto userDto) {
+       return UserMapper.toUserDto(userRepository.createUser(UserMapper.toUser(userDto)));
     }
 
     public User updateUser(User user) {

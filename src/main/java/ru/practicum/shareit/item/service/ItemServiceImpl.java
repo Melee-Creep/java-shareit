@@ -18,7 +18,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto getItem(long id) {
-
         return ItemMapper.toItemDto(itemRepository.getItem(id));
     }
 
@@ -33,8 +32,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item createItem(Item item, long userId) {
-        return itemRepository.createItem(item, userId);
+    public ItemDto createItem(ItemDto itemDto, long userId) {
+        return ItemMapper.toItemDto(itemRepository.createItem(ItemMapper.toItem(itemDto), userId));
     }
 
     @Override

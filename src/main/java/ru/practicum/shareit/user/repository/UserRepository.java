@@ -11,5 +11,4 @@ public interface UserRepository {
     User updateUser(User user);
 
     void removeUser(long id);
-
 }

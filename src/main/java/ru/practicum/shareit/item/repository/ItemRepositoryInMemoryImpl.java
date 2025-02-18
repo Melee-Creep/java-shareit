@@ -47,10 +47,7 @@ public class ItemRepositoryInMemoryImpl implements ItemRepository {
     public Item createItem(Item item, long userId) {
         log.info("Начало добавления предмета item={}", item);
 
-        if (item.getId()  == null) {
-            item.setId(getNextId());
-        }
-
+        item.setId(getNextId());
         items.put(item.getId(), item);
 
         log.info("Конец добавления предмета item={}", item);

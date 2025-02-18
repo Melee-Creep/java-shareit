@@ -33,9 +33,7 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
         }
         uniqueEmail.add(user.getEmail());
 
-        if (user.getId()  == null) {
-            user.setId(getNextId());
-        }
+        user.setId(getNextId());
         users.put(user.getId(), user);
 
         log.info("Конец создания пользователя - {}", user);
@@ -64,7 +62,6 @@ public class UserRepositoryInMemoryImpl implements UserRepository {
         users.put(user.getId(), user);
 
         log.info("Конец обновления пользователя - {}", users.get(user.getId()));
-
         return users.get(user.getId());
     }
 

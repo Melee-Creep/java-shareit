@@ -1,10 +1,10 @@
 package ru.practicum.shareit.user.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.exception.ValidateException;
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserService;
@@ -27,9 +27,8 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        validateUser(user);
-        return userService.createUser(user);
+    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
+        return userService.createUser(userDto);
     }
 
     @PatchMapping("/{id}")
@@ -43,16 +42,5 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeUser(@PathVariable long id) {
          userService.removeUser(id);
-    }
-
-    private void validateUser(User user) {
-        if (user.getEmail() == null || user.getEmail().isBlank()) {
-            log.error("Не указан email, userEmail={}", user.getEmail());
-            throw new ValidateException("Email не указан, либо пустой");
-        }
-        if (!user.getEmail().contains("@")) {
-            log.error("Почта должна содержать сивол @, userEmail={}", user.getEmail());
-            throw new ValidateException("Почта должна содержать символ @");
-        }
     }
 }
