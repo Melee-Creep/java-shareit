@@ -13,7 +13,6 @@ import ru.practicum.shareit.user.service.UserService;
 /**
  * TODO Sprint add-controllers.
  */
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/users")
