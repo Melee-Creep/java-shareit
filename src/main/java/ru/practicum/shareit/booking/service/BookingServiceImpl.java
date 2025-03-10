@@ -72,8 +72,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto approveBooking(long userId, long booking_Id, BookingStatus state) {
-        Booking booking = BookingMapper.toBooking(getBookingById(booking_Id, userId));
+    public BookingDto approveBooking(long userId, long bookingId, BookingStatus state) {
+        Booking booking = BookingMapper.toBooking(getBookingById(bookingId, userId));
         if (booking.getItem().getOwner().getId() != userId) {
             throw new NotTheOwnerException("Пользователь с id=" + userId + " не является владельцев вещи");
         }

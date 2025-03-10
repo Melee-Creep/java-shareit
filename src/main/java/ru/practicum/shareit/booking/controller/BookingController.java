@@ -57,10 +57,10 @@ public class BookingController {
 
     @PatchMapping("/{booking_Id}")
     public BookingDto approveBooking(@RequestHeader(value = "X-Sharer-User-Id") Long userId,
-                               @PathVariable Long booking_Id,
+                               @PathVariable Long bookingId,
                                @RequestParam boolean approved) {
 
         BookingStatus state = approved ? BookingStatus.APPROVED : BookingStatus.REJECTED;
-        return bookingService.approveBooking(userId, booking_Id , state);
+        return bookingService.approveBooking(userId, bookingId, state);
     }
 }

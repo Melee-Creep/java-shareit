@@ -56,7 +56,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/comment")
-    public CommentDto CreateItemComment(@PathVariable long itemId,
+    public CommentDto createItemComment(@PathVariable long itemId,
                                         @RequestHeader(value = "X-Sharer-User-Id") Long authorId,
                                         @RequestBody Comment comment) {
         Collection<BookingDto> bookings = bookingService.getAllBooking("ALL", authorId);

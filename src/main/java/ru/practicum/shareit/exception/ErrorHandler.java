@@ -43,19 +43,19 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse BadRequestBooking(final UnavailableBookingException e) {
+    public ErrorResponse badRequestBooking(final UnavailableBookingException e) {
         return new ErrorResponse("Ошибка валидации данных", e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse BadRequestNotOwner(final NotTheOwnerException e) {
+    public ErrorResponse badRequestNotOwner(final NotTheOwnerException e) {
         return new ErrorResponse("Ошибка валидации данных", e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse BadRequestIncompleteComment(final IncompleteCommentException e) {
+    public ErrorResponse badRequestIncompleteComment(final IncompleteCommentException e) {
         return new ErrorResponse("Ошибка валидации данных", e.getMessage());
     }
 }
