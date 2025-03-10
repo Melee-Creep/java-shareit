@@ -10,7 +10,7 @@ public interface BookingService {
 
     Collection<BookingDto> getBookingByOwner(String text, Long userId);
 
-    BookingDto getBookingById(long booking_id, long userId);
+    BookingDto getBookingById(long bookingId, long userId);
 
     BookingDto createBooking(BookingDto bookingDto);
 

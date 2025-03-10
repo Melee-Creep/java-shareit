@@ -42,17 +42,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto getBookingById(long booking_id, long userId) {
+    public BookingDto getBookingById(long bookingId, long userId) {
 
         log.info("userId={}", userId);
-        Booking booking = bookingRepository.findById(booking_id)
+        Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Бронирование не найдено"));
         Item item = booking.getItem();
         if (booking.getBooker().getId() == userId) {
-            return BookingMapper.toBookingDto(bookingRepository.findById(booking_id).get());
+            return BookingMapper.toBookingDto(bookingRepository.findById(bookingId).get());
         }
         if (item.getOwner().getId() == userId) {
-            return BookingMapper.toBookingDto(bookingRepository.findById(booking_id).get());
+            return BookingMapper.toBookingDto(bookingRepository.findById(bookingId).get());
         }
         log.error("пользователь userId={}, не как не относиться к вещи item={}", userId, booking.getItem());
         log.error("item.getOwner={}", item.getOwner().getId());
