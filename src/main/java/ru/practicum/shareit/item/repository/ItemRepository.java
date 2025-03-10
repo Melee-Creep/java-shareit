@@ -1,18 +1,13 @@
 package ru.practicum.shareit.item.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.Collection;
 
-public interface ItemRepository {
+public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    Item getItem(long id);
+    Collection<Item> findAllItemByOwnerId(long userId);
 
-    Collection<Item> getItemOwner(long userId);
-
-    Collection<Item> findByText(String text);
-
-    Item createItem(Item item, long userId);
-
-    Item updateItem(Item item, long userId);
+    Collection<Item> findItemByNameIgnoreCase(String text);
 }

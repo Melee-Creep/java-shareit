@@ -3,14 +3,15 @@ package ru.practicum.shareit.item.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.Data;
-import ru.practicum.shareit.request.ItemRequest;
-import ru.practicum.shareit.user.dto.UserDto;
+import lombok.Getter;
+import lombok.Setter;
+import ru.practicum.shareit.user.model.User;
 
 /**
  * TODO Sprint add-controllers.
  */
-@Data
+@Getter
+@Setter
 @Builder
 public class ItemDto {
 
@@ -21,6 +22,6 @@ public class ItemDto {
     private String description;
     @NotNull(message = "Поле доступности должно быть указано")
     private Boolean available;
-    private ItemRequest request;
-    private UserDto owner;
+    private Long request;
+    private User owner;
 }
