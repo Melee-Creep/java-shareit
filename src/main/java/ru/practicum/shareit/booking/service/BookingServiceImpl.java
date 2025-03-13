@@ -13,8 +13,9 @@ import ru.practicum.shareit.exception.UnavailableBookingException;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.service.ItemService;
+import ru.practicum.shareit.user.mapper.UserMapper;
+import ru.practicum.shareit.user.service.UserService;
 
-import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -24,9 +25,11 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
     private final ItemService itemService;
+    private final UserService userService;
 
     @Override
-    public Collection<BookingDto> getAllBooking(String text, Long userId) {
+    public List<BookingDto> getAllBooking(String text, Long userId) {
+        checkUser(userId);
         List<Booking> bookings = bookingRepository.findByBooker_IdOrderByStartDesc(userId);
         return bookings.stream()
                 .map(BookingMapper::toBookingDto)
@@ -34,7 +37,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Collection<BookingDto> getBookingByOwner(String text, Long userId) {
+    public List<BookingDto> getBookingByOwner(String text, Long userId) {
+        checkUser(userId);
         List<Booking> bookings = bookingRepository.findByBooker_IdOrderByStartDesc(userId);
         return bookings.stream()
                 .map(BookingMapper::toBookingDto)
@@ -48,10 +52,10 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Бронирование не найдено"));
         Item item = booking.getItem();
-        if (booking.getBooker().getId() == userId) {
+        if (booking.getBooker().getId() == userId && bookingRepository.findById(bookingId).isPresent()) {
             return BookingMapper.toBookingDto(bookingRepository.findById(bookingId).get());
         }
-        if (item.getOwner().getId() == userId) {
+        if (item.getOwner().getId() == userId && bookingRepository.findById(bookingId).isPresent()) {
             return BookingMapper.toBookingDto(bookingRepository.findById(bookingId).get());
         }
         log.error("пользователь userId={}, не как не относиться к вещи item={}", userId, booking.getItem());
@@ -60,7 +64,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto createBooking(BookingDto bookingDto) {
+    public BookingDto createBooking(BookingDto bookingDto, long userId) {
+        bookingDto.setBooker(UserMapper.toUser(userService.getUserById(userId)));
         Item item = ItemMapper.toItem(itemService.getItem(bookingDto.getItemId()));
         if (!item.getAvailable()) {
             throw new UnavailableBookingException("Предмет: " + item.getName() + " не доступен для бронирования");
@@ -72,12 +77,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDto approveBooking(long userId, long bookingId, BookingStatus state) {
+    public BookingDto approveBooking(long userId, long bookingId, boolean approved) {
+        BookingStatus state = approved ? BookingStatus.APPROVED : BookingStatus.REJECTED;
         Booking booking = BookingMapper.toBooking(getBookingById(bookingId, userId));
         if (booking.getItem().getOwner().getId() != userId) {
             throw new NotTheOwnerException("Пользователь с id=" + userId + " не является владельцев вещи");
         }
         booking.setStatus(state);
         return BookingMapper.toBookingDto(bookingRepository.save(booking));
+    }
+
+    private void checkUser(long userId) {
+        userService.getUserById(userId);
     }
 }
