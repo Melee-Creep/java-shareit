@@ -19,7 +19,6 @@ import java.util.List;
 public class BookingController {
 
     private final BookingService bookingService;
-    private final UserService userService;
 
     @GetMapping()
     public List<BookingDto> getAllUserBooking(@RequestHeader(value = "X-Sharer-User-Id") Long userId,
