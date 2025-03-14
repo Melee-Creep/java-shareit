@@ -64,4 +64,9 @@ public class UserServiceImp implements UserService {
     public void removeUser(long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isExist(long userId) {
+        return userRepository.existsById(userId);
+    }
 }

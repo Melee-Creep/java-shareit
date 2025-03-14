@@ -88,6 +88,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private void checkUser(long userId) {
-        userService.getUserById(userId);
+        if (!userService.isExist(userId)) {
+            throw new NotFoundException("Пользователь с id=" + userId + " не найден");
+        }
     }
 }
