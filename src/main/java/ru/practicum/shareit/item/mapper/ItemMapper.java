@@ -1,6 +1,7 @@
 package ru.practicum.shareit.item.mapper;
 
 import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.dto.ItemResponseComment;
 import ru.practicum.shareit.item.model.Item;
 
 public class ItemMapper {
@@ -18,6 +19,7 @@ public class ItemMapper {
                 .request(item.getRequest())
                 .owner(item.getOwner())
                 .build();
+
     }
 
     public static Item toItem(ItemDto itemDto) {
@@ -34,4 +36,15 @@ public class ItemMapper {
                 .owner(itemDto.getOwner())
                 .build();
     }
+
+    public static ItemResponseComment toItemComment(Item item) {
+        return ItemResponseComment.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .available(item.getAvailable())
+                .build();
+    }
+
+
 }

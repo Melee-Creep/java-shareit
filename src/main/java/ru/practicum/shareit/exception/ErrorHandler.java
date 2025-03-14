@@ -40,4 +40,22 @@ public class ErrorHandler {
     public ErrorResponse validItemAnnotation(final UnexpectedTypeException e) {
         return new ErrorResponse("Ошибка валидации данных", e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequestBooking(final UnavailableBookingException e) {
+        return new ErrorResponse("Ошибка валидации данных", e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequestNotOwner(final NotTheOwnerException e) {
+        return new ErrorResponse("Ошибка валидации данных", e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse badRequestIncompleteComment(final IncompleteCommentException e) {
+        return new ErrorResponse("Ошибка валидации данных", e.getMessage());
+    }
 }
