@@ -56,19 +56,19 @@ public class BookingServiceTest {
                 .build();
         userRepository.save(owner);
 
-        notOwner = User.builder()
-                .id(3L)
-                .name("noOwner")
-                .email("testnoOwner")
-                .build();
-        userRepository.save(notOwner);
-
         booker = User.builder()
                 .id(2L)
                 .name("testBooker")
                 .email("testBooker@email.com")
                 .build();
         userRepository.save(booker);
+
+        notOwner = User.builder()
+                .id(3L)
+                .name("noOwner")
+                .email("testnoOwner")
+                .build();
+        userRepository.save(notOwner);
 
         item = Item.builder()
                 .id(1L)
@@ -114,11 +114,6 @@ public class BookingServiceTest {
     @Test
     void getAllBooking() {
 
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
         List<BookingRequestDto> result = bookingService.getAllBooking("ALL", booker.getId());
 
 
@@ -133,11 +128,6 @@ public class BookingServiceTest {
 
     @Test
     void getBookingByOwner() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
 
         List<BookingRequestDto> result = bookingService.getBookingByOwner("ALL", owner.getId());
 
@@ -152,11 +142,6 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
 
         Booking result = BookingMapper.toBooking(bookingService.getBookingById(bookingByOwner.getId(), owner.getId()));
 
@@ -171,33 +156,18 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById_NotFoundException() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
 
         assertThrows(NotFoundException.class, () -> bookingService.getBookingById(10000L, owner.getId()));
     }
 
     @Test
     void getBookingById_NotTheOwnerException() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
 
         assertThrows(NotTheOwnerException.class, () -> bookingService.getBookingById(booking.getId(), notOwner.getId()));
     }
 
     @Test
     void createBooking() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
 
         Booking create = Booking.builder()
                 .id(3L)
@@ -220,11 +190,6 @@ public class BookingServiceTest {
 
     @Test
     void approveBooking() {
-        booker = User.builder()
-                .id(2L)
-                .name("testBooker")
-                .email("testBooker@email.com")
-                .build();
         BookingRequestDto create = BookingRequestDto.builder()
                 .start(LocalDateTime.of(2025, 10, 10, 10, 10))
                 .end(LocalDateTime.of(2025,10,10,11,11))
