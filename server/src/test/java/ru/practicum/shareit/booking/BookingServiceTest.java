@@ -114,15 +114,11 @@ public class BookingServiceTest {
     @Test
     void getAllBooking() {
 
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
-
         List<BookingRequestDto> result = bookingService.getAllBooking("ALL", booker.getId());
 
 
@@ -137,13 +133,10 @@ public class BookingServiceTest {
 
     @Test
     void getBookingByOwner() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
 
         List<BookingRequestDto> result = bookingService.getBookingByOwner("ALL", owner.getId());
@@ -159,13 +152,10 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
 
         Booking result = BookingMapper.toBooking(bookingService.getBookingById(bookingByOwner.getId(), owner.getId()));
@@ -181,13 +171,10 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById_NotFoundException() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
 
         assertThrows(NotFoundException.class, () -> bookingService.getBookingById(10000L, owner.getId()));
@@ -195,13 +182,10 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById_NotTheOwnerException() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
 
         assertThrows(NotTheOwnerException.class, () -> bookingService.getBookingById(booking.getId(), notOwner.getId()));
@@ -209,13 +193,10 @@ public class BookingServiceTest {
 
     @Test
     void createBooking() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
 
         Booking create = Booking.builder()
@@ -239,13 +220,10 @@ public class BookingServiceTest {
 
     @Test
     void approveBooking() {
-        bookingByOwner = Booking.builder()
+        booker = User.builder()
                 .id(2L)
-                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .end(LocalDateTime.of(2025,10,10,11,11))
-                .item(item)
-                .booker(owner)
-                .status(BookingStatus.APPROVED)
+                .name("testBooker")
+                .email("testBooker@email.com")
                 .build();
         BookingRequestDto create = BookingRequestDto.builder()
                 .start(LocalDateTime.of(2025, 10, 10, 10, 10))
