@@ -48,7 +48,7 @@ public class BookingServiceTest {
     private Item unavalibleItem;
 
     @BeforeEach
-    void BeforeEach() {
+    void setUp() {
         owner = User.builder()
                 .id(1L)
                 .name("testUser")

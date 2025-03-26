@@ -63,7 +63,7 @@ public class ItemControllerTest {
     private BookingRequestDto booking;
 
     @BeforeEach
-    void BeforeEach() {
+    void setUp() {
 
         userRequestDto = UserRequestDto.builder()
                 .id(1L)

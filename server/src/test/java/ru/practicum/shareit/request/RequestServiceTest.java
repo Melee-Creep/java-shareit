@@ -40,7 +40,7 @@ public class RequestServiceTest {
     private ItemRequest itemRequest;
 
     @BeforeEach
-    void BeforeEach() {
+    void setUp() {
         owner = User.builder()
                 .id(1L)
                 .name("testUser")

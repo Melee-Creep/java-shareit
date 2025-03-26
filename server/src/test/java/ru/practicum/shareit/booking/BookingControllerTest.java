@@ -49,7 +49,7 @@ public class BookingControllerTest {
     private Item item;
 
     @BeforeEach
-    void BeforeEach() {
+    void setUp() {
         booker = User.builder()
                 .id(2L)
                 .name("booker")

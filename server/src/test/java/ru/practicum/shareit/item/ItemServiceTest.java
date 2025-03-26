@@ -46,7 +46,7 @@ public class ItemServiceTest {
     private Comment comment;
 
     @BeforeEach
-    void BeforeEach() {
+    void setUp() {
         owner = User.builder()
                 .id(1L)
                 .name("testUser")
