@@ -117,7 +117,7 @@ public class BookingServiceTest {
     @Test
     void getAllBooking() {
 
-        List<BookingRequestDto> result = bookingService.getAllBooking("ALL", booker.getId());
+        List<BookingRequestDto> result = bookingService.getAllBooking("ALL", 2L);
 
 
         assertThat(result, notNullValue());
