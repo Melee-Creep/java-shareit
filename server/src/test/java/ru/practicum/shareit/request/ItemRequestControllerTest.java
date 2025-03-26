@@ -46,7 +46,7 @@ public class ItemRequestControllerTest {
                 .id(1L)
                 .description("test")
                 .created(LocalDateTime.of(2025,10,10,10,10))
-                .requestor_id(2L)
+                .requestorId(2L)
                 .build();
 
         when(itemRequestService.getUserIdRequest(anyLong())).thenReturn(List.of(itemRequestDto));
@@ -82,7 +82,7 @@ public class ItemRequestControllerTest {
                 .id(1L)
                 .description("test")
                 .created(LocalDateTime.of(2025,10,10,10,10))
-                .requestor_id(2L)
+                .requestorId(2L)
                 .build();
 
         when(itemRequestService.createRequest(anyLong(), any(ItemRequestDto.class)))

@@ -15,9 +15,9 @@ public class ItemRequestMapper {
             return null;
         }
         return ItemRequestDto.builder()
-                .id(itemRequest.getRequest_id())
+                .id(itemRequest.getRequestId())
                 .description(itemRequest.getDescription())
-                .requestor_id(itemRequest.getRequestor().getId())
+                .requestorId(itemRequest.getRequestor().getId())
                 .created(itemRequest.getCreated())
                 .build();
 
@@ -29,7 +29,7 @@ public class ItemRequestMapper {
             return null;
         }
         return ItemRequest.builder()
-                .request_id(itemRequestDto.getId())
+                .requestId(itemRequestDto.getId())
                 .description(itemRequestDto.getDescription())
                 .created(itemRequestDto.getCreated() != null ? itemRequestDto.getCreated() : LocalDateTime.now())
                 .build();
@@ -41,7 +41,7 @@ public class ItemRequestMapper {
             return null;
         }
         return ItemRequestorDto.builder()
-                .id(itemRequest.getRequest_id())
+                .id(itemRequest.getRequestId())
                 .description(itemRequest.getDescription())
                 .created(itemRequest.getCreated())
                 .build();

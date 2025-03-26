@@ -66,7 +66,7 @@ public class RequestServiceTest {
         itemRepository.save(item);
 
         itemRequest = ItemRequest.builder()
-                .request_id(1L)
+                .requestId(1L)
                 .description("testItemRequest")
                 .requestor(requestor)
                 .created(LocalDateTime.of(2025, 10, 10, 10, 10))
@@ -79,17 +79,17 @@ public class RequestServiceTest {
         List<ItemRequestDto> result = itemRequestService.getUserIdRequest(requestor.getId());
 
         assertThat(result, notNullValue());
-        assertThat(result.iterator().next().getId(), is(itemRequest.getRequest_id()));
+        assertThat(result.iterator().next().getId(), is(itemRequest.getRequestId()));
         assertThat(result.iterator().next().getDescription(), is(itemRequest.getDescription()));
-        assertThat(result.iterator().next().getRequestor_id(), is(itemRequest.getRequestor().getId()));
+        assertThat(result.iterator().next().getRequestorId(), is(itemRequest.getRequestor().getId()));
     }
 
     @Test
     void getRequestId() {
-        ItemRequestorDto result = itemRequestService.getRequestId(itemRequest.getRequest_id());
+        ItemRequestorDto result = itemRequestService.getRequestId(itemRequest.getRequestId());
 
         assertThat(result, notNullValue());
-        assertThat(result.getId(), is(itemRequest.getRequest_id()));
+        assertThat(result.getId(), is(itemRequest.getRequestId()));
         assertThat(result.getDescription(), is(itemRequest.getDescription()));
         assertThat(result.getCreated(), is(itemRequest.getCreated()));
     }
@@ -100,7 +100,7 @@ public class RequestServiceTest {
                 .id(2L)
                 .description("test")
                 .created(LocalDateTime.of(2025, 10, 10, 10, 10))
-                .requestor_id(requestor.getId())
+                .requestorId(requestor.getId())
                 .build();
         ItemRequestDto result = itemRequestService.createRequest(requestor.getId(), create);
 
