@@ -113,7 +113,18 @@ public class BookingServiceTest {
 
     @Test
     void getAllBooking() {
+
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         List<BookingRequestDto> result = bookingService.getAllBooking("ALL", booker.getId());
+
 
         assertThat(result, notNullValue());
         assertThat(result.iterator().next().getId(), is(booking.getId()));
@@ -126,6 +137,15 @@ public class BookingServiceTest {
 
     @Test
     void getBookingByOwner() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         List<BookingRequestDto> result = bookingService.getBookingByOwner("ALL", owner.getId());
 
         assertThat(result, notNullValue());
@@ -139,6 +159,15 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         Booking result = BookingMapper.toBooking(bookingService.getBookingById(bookingByOwner.getId(), owner.getId()));
 
         assertThat(result, notNullValue());
@@ -152,16 +181,43 @@ public class BookingServiceTest {
 
     @Test
     void getBookingById_NotFoundException() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         assertThrows(NotFoundException.class, () -> bookingService.getBookingById(10000L, owner.getId()));
     }
 
     @Test
     void getBookingById_NotTheOwnerException() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         assertThrows(NotTheOwnerException.class, () -> bookingService.getBookingById(booking.getId(), notOwner.getId()));
     }
 
     @Test
     void createBooking() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
+
         Booking create = Booking.builder()
                 .id(3L)
                 .start(LocalDateTime.of(2025, 10, 10, 10, 10))
@@ -183,6 +239,14 @@ public class BookingServiceTest {
 
     @Test
     void approveBooking() {
+        bookingByOwner = Booking.builder()
+                .id(2L)
+                .start(LocalDateTime.of(2025, 10, 10, 10, 10))
+                .end(LocalDateTime.of(2025,10,10,11,11))
+                .item(item)
+                .booker(owner)
+                .status(BookingStatus.APPROVED)
+                .build();
         BookingRequestDto create = BookingRequestDto.builder()
                 .start(LocalDateTime.of(2025, 10, 10, 10, 10))
                 .end(LocalDateTime.of(2025,10,10,11,11))
