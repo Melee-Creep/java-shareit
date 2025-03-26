@@ -103,7 +103,7 @@ public class UserServiceTest {
     @Test
     void deleteUser() {
         User create = User.builder()
-                .id(2L)
+                .id(10L)
                 .name("name")
                 .email("email@email.com")
                 .build();
