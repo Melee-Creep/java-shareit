@@ -14,6 +14,7 @@ public class ItemRequestMapper {
         if (itemRequest == null) {
             return null;
         }
+
         return ItemRequestDto.builder()
                 .id(itemRequest.getRequestId())
                 .description(itemRequest.getDescription())
