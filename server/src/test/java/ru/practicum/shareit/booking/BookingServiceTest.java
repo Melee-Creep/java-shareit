@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
 import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
@@ -28,7 +27,6 @@ import java.util.List;
 
 @Slf4j
 @SpringBootTest
-@Transactional
 public class BookingServiceTest {
 
     @Autowired
@@ -57,6 +55,7 @@ public class BookingServiceTest {
                 .email("testUser@email.com")
                 .build();
         userRepository.save(owner);
+        log.info("Created owner with ID: {}", owner.getId());
 
         booker = User.builder()
                 .id(2L)
@@ -64,6 +63,7 @@ public class BookingServiceTest {
                 .email("testBooker@email.com")
                 .build();
         userRepository.save(booker);
+        log.info("Created owner with ID: {}", booker.getId());
 
         notOwner = User.builder()
                 .id(3L)
@@ -71,6 +71,7 @@ public class BookingServiceTest {
                 .email("testnoOwner")
                 .build();
         userRepository.save(notOwner);
+        log.info("Created owner with ID: {}", notOwner.getId());
 
         item = Item.builder()
                 .id(1L)
