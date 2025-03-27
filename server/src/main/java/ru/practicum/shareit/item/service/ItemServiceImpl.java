@@ -1,6 +1,8 @@
 package ru.practicum.shareit.item.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.item.dto.ItemRequestDtos;
@@ -13,12 +15,13 @@ import ru.practicum.shareit.item.repository.ItemRepository;
 
 import java.util.List;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepository itemRepository;
-    private final CommentRepository commentRepository;
+     ItemRepository itemRepository;
+     CommentRepository commentRepository;
 
     @Override
     public ItemRequestDtos getItem(long id) {

@@ -49,7 +49,7 @@ public class ItemRequestControllerTest {
                 .requestorId(2L)
                 .build();
 
-        when(itemRequestService.getUserIdRequest(anyLong())).thenReturn(List.of(itemRequestDto));
+        when(itemRequestService.getRequestByUserId(anyLong())).thenReturn(List.of(itemRequestDto));
 
         mockMvc.perform(get("/requests")
                 .header("X-Sharer-User-Id", "1"))

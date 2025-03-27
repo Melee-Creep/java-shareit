@@ -1,6 +1,8 @@
 package ru.practicum.shareit.request.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.item.dto.ItemRequestDtos;
@@ -19,31 +21,35 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ItemRequestServiceImpl implements ItemRequestService {
 
-    private final ItemRequestRepository itemRequestRepository;
-    private final UserService userService;
-    private final ItemService itemService;
+     ItemRequestRepository itemRequestRepository;
+     UserService userService;
+     ItemService itemService;
 
 
     @Override
-    public List<ItemRequestDto> getUserIdRequest(long userId) {
+    public List<ItemRequestDto> getRequestByUserId(long userId) {
         checkUser(userId);
         List<ItemRequest> itemRequest = itemRequestRepository.findAllRequestByRequestorId(userId);
-        List<ItemRequestDto> itemRequestDto = itemRequest.stream()
+
+        return itemRequest.stream()
                 .map(ItemRequestMapper::toItemRequestDto)
                 .toList();
-        return itemRequestDto;
-
     }
 
     @Override
     public ItemRequestorDto getRequestId(long requestId) {
         ItemRequest itemRequest = itemRequestRepository.findById(requestId)
                 .orElseThrow(() -> new NotFoundException("Запрос с id=" + requestId + " не найден!"));
+
         List<Item> items = itemService.findByRequestId(requestId);
+
         List<ItemRequestDtos> itemRequestDtos = items.stream()
-                .map(ItemMapper::toItemDto).toList();
+                .map(ItemMapper::toItemDto)
+                .toList();
+
         ItemRequestorDto itemRequestorDto = ItemRequestMapper.toItemRequestorDto(itemRequest);
         itemRequestorDto.setItems(itemRequestDtos);
         return itemRequestorDto;

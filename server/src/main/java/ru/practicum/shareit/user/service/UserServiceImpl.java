@@ -1,6 +1,8 @@
 package ru.practicum.shareit.user.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.EmailAlreadyExistException;
@@ -15,11 +17,12 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final Set<String> uniqueEmail = new HashSet<>();
+     UserRepository userRepository;
+     Set<String> uniqueEmail = new HashSet<>();
 
     @Override
     public UserRequestDto getUserById(long id) {

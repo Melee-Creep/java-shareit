@@ -1,17 +1,20 @@
 package ru.practicum.shareit.request;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
 @RequestMapping(path = "/requests")
 public class ItemRequestController {
 
-    private final ItemRequestClient itemRequestClient;
+    ItemRequestClient itemRequestClient;
 
     @GetMapping
     public ResponseEntity<Object> getUserIdRequest(@RequestHeader(value = "X-Sharer-User-Id") long userId) {

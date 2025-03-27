@@ -1,6 +1,8 @@
 package ru.practicum.shareit.user;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -8,10 +10,11 @@ import ru.practicum.shareit.user.dto.UserRequestDto;
 
 @RestController
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(path = "/users")
 public class UserController {
 
-    private final UserClient userClient;
+    UserClient userClient;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable long id) {

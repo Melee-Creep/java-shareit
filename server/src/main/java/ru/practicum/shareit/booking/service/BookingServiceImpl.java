@@ -1,6 +1,8 @@
 package ru.practicum.shareit.booking.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
@@ -21,12 +23,13 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    private final BookingRepository bookingRepository;
-    private final ItemService itemService;
-    private final UserService userService;
+     BookingRepository bookingRepository;
+     ItemService itemService;
+     UserService userService;
 
     @Override
     public List<BookingRequestDto> getAllBooking(String text, Long userId) {

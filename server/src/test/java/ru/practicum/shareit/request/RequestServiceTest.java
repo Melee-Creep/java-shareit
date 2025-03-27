@@ -76,7 +76,7 @@ public class RequestServiceTest {
 
     @Test
     void getUserIdRequest() {
-        List<ItemRequestDto> result = itemRequestService.getUserIdRequest(requestor.getId());
+        List<ItemRequestDto> result = itemRequestService.getRequestByUserId(requestor.getId());
 
         assertThat(result, notNullValue());
         assertThat(result.iterator().next().getId(), is(itemRequest.getRequestId()));

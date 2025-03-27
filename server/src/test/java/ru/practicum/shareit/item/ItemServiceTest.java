@@ -203,8 +203,6 @@ public class ItemServiceTest {
         assertThat(result.getText(), is(createComment.getText()));
         assertThat(result.getAuthor().getName(), is(createComment.getAuthor().getName()));
         assertThat(result.getItem().getName(), is(createComment.getItem().getName()));
-        assertThat(result.getCreated(), is(createComment.getCreated()));
-
     }
 
     @Test

@@ -1,7 +1,9 @@
 package ru.practicum.shareit.item.controller;
 
 import jakarta.validation.Valid;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
 import ru.practicum.shareit.booking.service.BookingService;
@@ -21,13 +23,14 @@ import ru.practicum.shareit.user.service.UserService;
 import java.util.Collection;
 
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
-    private final ItemService itemService;
-    private final UserService userService;
-    private final BookingService bookingService;
+    ItemService itemService;
+    UserService userService;
+    BookingService bookingService;
 
     @GetMapping("/{itemId}")
     public ItemResponseComment getItem(@PathVariable long itemId) {

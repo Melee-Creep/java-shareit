@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,7 @@ public class Comment {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    @CreationTimestamp
     @Column(name = "created")
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created;
 }

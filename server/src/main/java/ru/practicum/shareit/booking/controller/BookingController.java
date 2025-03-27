@@ -1,6 +1,8 @@
 package ru.practicum.shareit.booking.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
@@ -11,10 +13,11 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(path = "/bookings")
 public class BookingController {
 
-    private final BookingService bookingService;
+    BookingService bookingService;
 
     @GetMapping()
     public List<BookingRequestDto> getAllUserBooking(@RequestHeader(value = "X-Sharer-User-Id") Long userId,

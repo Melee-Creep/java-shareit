@@ -1,6 +1,8 @@
 package ru.practicum.shareit.item;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,11 +12,12 @@ import ru.practicum.shareit.item.dto.ItemRequestDtos;
 
 @Slf4j
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
 @RequestMapping("/items")
 public class ItemController {
 
-    private final ItemClient itemClient;
+    ItemClient itemClient;
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getItem(@PathVariable long id) {

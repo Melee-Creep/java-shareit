@@ -1,6 +1,8 @@
 package ru.practicum.shareit.request;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.request.dto.ItemRequestorDto;
@@ -9,15 +11,16 @@ import ru.practicum.shareit.request.service.ItemRequestService;
 import java.util.List;
 
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RestController
 @RequestMapping(path = "/requests")
 public class ItemRequestController {
 
-    private final ItemRequestService itemRequestService;
+     ItemRequestService itemRequestService;
 
     @GetMapping
     public List<ItemRequestDto> getUserIdRequest(@RequestHeader(value = "X-Sharer-User-Id") long userId) {
-        return itemRequestService.getUserIdRequest(userId);
+        return itemRequestService.getRequestByUserId(userId);
     }
 
     @GetMapping("/{requestId}")

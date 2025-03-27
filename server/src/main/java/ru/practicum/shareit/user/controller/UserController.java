@@ -1,6 +1,8 @@
 package ru.practicum.shareit.user.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserRequestDto;
@@ -9,10 +11,11 @@ import ru.practicum.shareit.user.service.UserService;
 
 @RequiredArgsConstructor
 @RestController
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequestMapping(path = "/users")
 public class UserController {
 
-    private final UserService userService;
+     UserService userService;
 
     @GetMapping("/{id}")
     public UserRequestDto getUser(@PathVariable long id) {
